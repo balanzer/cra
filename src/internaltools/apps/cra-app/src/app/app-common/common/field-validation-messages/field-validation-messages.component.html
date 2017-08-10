@@ -1,0 +1,10 @@
+
+<div  *ngIf="fieldControl.touched">
+	<span class="help-block text-capitalize" *ngIf="fieldControl.hasError('required')">{{fieldLabel}} is required. </span> 
+	<span class="help-block text-capitalize" *ngIf="fieldControl.hasError('minlength')">{{fieldLabel}} must be at least {{ fieldControl.errors.minlength.requiredLength }} characters long. </span> 
+	<span class="help-block text-capitalize" *ngIf="fieldControl.hasError('maxlength')">{{fieldLabel}} cannot be more than {{ fieldControl.errors.maxlength.requiredLength }} characters long. </span> 
+	<span class="help-block text-capitalize" *ngIf="fieldControl.hasError('pattern')">{{fieldLabel}} is incorrect. </span>
+	<span class="help-block text-capitalize" *ngIf="fieldControl.hasError('whitespace')">{{fieldLabel}} requires pre/post trim spaces. </span>
+	<span class="help-block text-capitalize" *ngIf="fieldControl.hasError('lessthantoday')">Cannot select past or today. </span>
+	<span class="help-block text-capitalize" *ngIf="fieldControl.hasError('fromafterto')">Start date cannot be after end date.</span>
+</div> 

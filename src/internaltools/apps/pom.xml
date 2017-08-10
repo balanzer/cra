@@ -1,0 +1,119 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    
+
+	<parent>
+		<groupId>com.ihg.it.pfm</groupId>
+		<artifactId>pfm-internaltools</artifactId>
+		<version>4.0.2-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>com.ihg.it.pfm.apps.cra</artifactId>
+    <packaging>war</packaging>
+    <name>Project Module - CRA Application UI</name>
+    <description>Project Module - CRA Application UI</description>
+    <url>http://maven.apache.org</url>
+    <properties>
+      <war.name>cra</war.name>
+	  <sonar.skip>true</sonar.skip>
+    </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <build>
+  <plugins>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-compiler-plugin</artifactId>
+    </plugin>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-war-plugin</artifactId>
+      <version>2.6</version>
+	   <configuration>
+          <warName>${war.name}</warName>
+       </configuration>
+    </plugin>
+
+    <!-- Plugin to execute command  "npm install" and "npm run build" inside /angular directory -->
+	<!-- https://mvnrepository.com/artifact/com.github.eirslett/frontend-maven-plugin -->
+    <plugin>
+      <groupId>com.github.eirslett</groupId>
+      <artifactId>frontend-maven-plugin</artifactId>
+      <version>1.3</version>
+      <configuration>
+        <workingDirectory>cra-app</workingDirectory>
+        <installDirectory>temp</installDirectory>
+      </configuration>
+      <executions>
+        <!-- It will install nodejs and npm -->
+        <execution>
+          <id>install node and npm</id>
+          <goals>
+            <goal>install-node-and-npm</goal>
+          </goals>
+		    <configuration>
+            <nodeVersion>v6.9.5</nodeVersion>
+            <npmVersion>${npm.version}</npmVersion>
+          </configuration>
+        </execution>
+
+        <!-- It will execute command "npm install" inside "/angular<app>" directory -->
+        <execution>
+          <id>npm install</id>
+          <goals>
+            <goal>npm</goal>
+          </goals>
+          <configuration>
+            <arguments>install</arguments>
+          </configuration>
+        </execution>
+
+        <!-- It will execute command "npm build" inside "/angular<app>" directory to clean and create "/dist" directory-->
+        <execution>
+          <id>npm build</id>
+          <goals>
+            <goal>npm</goal>
+          </goals>
+          <configuration>
+            <arguments>run build</arguments>
+          </configuration>
+        </execution>
+      </executions>
+    </plugin>
+
+    <!-- Plugin to copy the content of /angular<app>/dist/ directory to output directory (ie/ /target/transactionManager-1.0/) -->
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-resources-plugin</artifactId>
+      <version>2.4.2</version>
+      <executions>
+        <execution>
+          <id>default-copy-resources</id>
+          <phase>process-resources</phase>
+          <goals>
+            <goal>copy-resources</goal>
+          </goals>
+          <configuration>
+            <overwrite>true</overwrite>
+            <outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}/</outputDirectory>
+            <resources>
+              <resource>
+                <directory>${project.basedir}/cra-app/dist</directory>
+              </resource>
+            </resources>
+          </configuration>
+        </execution>
+      </executions>
+    </plugin>
+  </plugins>
+</build>
+</project>

@@ -1,0 +1,110 @@
+/* You can add global styles to this file, and also import other style files */
+app-root, 
+app-request-keywords, 
+app-header, 
+app-navigation, 
+app-add-keywords, 
+app-requester-details, 
+app-add-new-keywords, app-footer {
+  display: block;
+  position: relative;
+}
+
+html, 
+body, 
+app-root, 
+app-request-keywords{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+app-add-keywords {
+  flex: 1 0 auto;
+  padding-top: 2%;
+  width: 100%;
+}
+
+app-add-keywords::after {
+    content: '\00a0';
+    display: block;
+    margin-top: 1%;
+    height: 0;
+    visibility: hidden;
+}
+
+@font-face {
+  font-family: 'Oswald';
+  src: url('assets/fonts/Oswald/regular/Oswald-Regular.eot');
+  src: url('assets/fonts/Oswald/regular/Oswald-Regular.eot') format('embedded-opentype'),
+  url('assets/fonts/Oswald/regular/Oswald-Regular.woff') format('woff'),
+  url('assets/fonts/Oswald/regular/Oswald-Regular.ttf') format('truetype'),
+  url('assets/fonts/Oswald/regular/Oswald-Regular.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Oswald Semibold';
+  src: url('assets/fonts/Oswald/semibold/Oswald-SemiBold.eot');
+  src: url('assets/fonts/Oswald/semibold/Oswald-SemiBold.eot') format('embedded-opentype'),
+  url('assets/fonts/Oswald/semibold/Oswald-SemiBold.woff') format('woff'),
+  url('assets/fonts/Oswald/semibold/Oswald-SemiBold.ttf') format('truetype'),
+  url('assets/fonts/Oswald/semibold/Oswald-SemiBold.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('assets/fonts/Montserrat/regular/Montserrat-Regular.eot');
+  src: url('assets/fonts/Montserrat/regular/Montserrat-Regular.eot') format('embedded-opentype'),
+  url('assets/fonts/Montserrat/regular/Montserrat-Regular.woff') format('woff'),
+  url('assets/fonts/Montserrat/regular/Montserrat-Regular.ttf') format('truetype'),
+  url('assets/fonts/Montserrat/regular/Montserrat-Regular.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/*Italic versions do not have unique .svg or .eot files so resort to regular versions */
+@font-face {
+  font-family: 'Montserrat Italic';
+  src: url('assets/fonts/Montserrat/regular/Montserrat-Regular.eot');
+  src: url('assets/fonts/Montserrat/regular/Montserrat-Regular.eot') format('embedded-opentype'),
+  url('assets/fonts/Montserrat/regular/Montserrat-Italic.woff') format('woff'),
+  url('assets/fonts/Montserrat/regular/Montserrat-Italic.ttf') format('truetype'),
+  url('assets/fonts/Montserrat/regular/Montserrat-Regular.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/*Semi Bold and Italic versions do not have unique .svg or .eot files so resort to regular versions */
+@font-face {
+  font-family: 'Montserrat Semibold';
+  src: url('assets/fonts/Montserrat/regular/Montserrat-Regular.eot');
+  src: url('assets/fonts/Montserrat/regular/Montserrat-Regular.eot') format('embedded-opentype'),
+  url('assets/fonts/Montserrat/semibold/Montserrat-SemiBold.woff') format('woff'),
+  url('assets/fonts/Montserrat/semibold/Montserrat-SemiBold.ttf') format('truetype'),
+  url('assets/fonts/Montserrat/regular/Montserrat-Regular.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat Semibold Italic';
+  src: url('assets/fonts/Montserrat/regular/Montserrat-Regular.eot');
+  src: url('assets/fonts/Montserrat/regular/Montserrat-Regular.eot') format('embedded-opentype'),
+  url('assets/fonts/Montserrat/semibold/Montserrat-SemiBoldItalic.woff') format('woff'),
+  url('assets/fonts/Montserrat/semibold/Montserrat-SemiBoldItalic.ttf') format('truetype'),
+  url('assets/fonts/Montserrat/regular/Montserrat-Regular.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+/* BOOTSTRAP OVERRIDES/ADDITIONS */
+
+.form-horizontal .form-group.no-gutters {
+  margin-right: 0;
+  margin-left: 0;
+}

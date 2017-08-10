@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>com.ihg.it.pfm.services</artifactId>
+	<packaging>jar</packaging>
+	<name>Project Module - Services</name>
+	<description>Project Module - Services</description>
+
+	<parent>
+		<groupId>com.ihg.it.pfm</groupId>
+		<artifactId>pfm-internaltools</artifactId>
+		<version>4.0.2-SNAPSHOT</version>
+	</parent>
+
+
+
+	<dependencies>
+		<!-- Project modules -->
+		<dependency>
+			<groupId>com.ihg.it.pfm</groupId>
+			<artifactId>com.ihg.it.pfm.domain</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
+
+
+</project>

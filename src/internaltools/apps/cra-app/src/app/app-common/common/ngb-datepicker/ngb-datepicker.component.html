@@ -1,0 +1,10 @@
+    <div class="input-group">
+      <input class="form-control" placeholder="yyyy-mm-dd" disabled
+             name="dp" (ngModelChange)="dateSelected($event)" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker"  [displayMonths]="displayMonths" [navigation]="navigation" [minDate]="minDate" [maxDate]="maxDate">
+      <div class="input-group-addon" (click)="d.toggle()" >
+        <img src="/assets/images/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+      </div>
+    </div>
+
+<!--  {{model | json}} -->
+ 
