@@ -1,21 +1,2 @@
-<app-requester-information [viewMode]="'create'"
-	(requesterOut)="setRequesterInformation($event)"></app-requester-information>	
 
-<app-campaign-information [viewMode]="'create'"
-	(campaignOut)="setCampaignInformation($event)"></app-campaign-information>
-	
-	
-<div class="col-xs-6 text-left">
-	<button  [disabled]="!finalFormValidStatus" class="btn" (click)="createCampaign()">Create Campaign</button>
-	<!-- <button class="btn" (click)="logCompleteInformation()">Log All
-		Info</button> -->
-
-	Final Form verification status : {{finalFormValidStatus}}
-</div>
-
-<div class="col-xs-12 text-left">
-<h2>Campaign</h2>
-{{campaignDetails | json}}
-<h2>Requester</h2>
-{{requesterDetails | json}}
-</div>
+<app-campaign-details [viewMode]="'manage'" [inputCampaignDetails]=campaignDetailForManage ></app-campaign-details>

@@ -16,7 +16,7 @@ public class DateUtils {
 
     public static String convertDate(Date input) {
         if (null != input) {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy/MMM/dd");
+            SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
             return format.format(input);
         }
         return null;
@@ -24,7 +24,7 @@ public class DateUtils {
 
     public static Date convertDate(String input) throws ParseException {
         if (null != input) {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy/MMM/dd");
+            SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
             return format.parse(input);
         }
         return null;

@@ -1,15 +1,19 @@
-<div class="container-fluid">
+
+<div class="container">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
-			<h3 class="panel-title text-capitalize">Campaign Details</h3>
+			<h3 class="panel-title text-capitalize">Campaign Information</h3>
 		</div>
 		<div class="panel-body">
-			<form class="form-horizontal col-md-offset-2"
+
+			<form class="form-horizontal"
 				[formGroup]="campaignInformationFormGroup" (ngSubmit)="doSubmit()"
 				(change)="validateCampaignFormStatus()">
-				<div class="row">
-					<div class="col-sm-5">
-						<div class="form-group">
+
+				<div class="form-group">
+					<div
+						class="col-xs-12 col-md-6 col-md-offset-1 col-lg-5 col-lg-offset-1">
+						<div [class]="applyValidationStatus('campaignName')">
 							<label class="control-label text-capitalize" for="campaignName">Campaign
 								Name <app-field-required-flag
 									[requiredFlag]="controls['campaignName'].invalid && !controls['campaignName'].touched"></app-field-required-flag>
@@ -18,7 +22,7 @@
 								<span class="input-group-addon"> <span
 									class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 								</span><input type="text" class="form-control" id="campaignName"
-									formControlName="campaignName">
+									formControlName="campaignName" [attr.disabled]="viewMode==='view' ? true : null">
 								<app-field-validation-icons
 									[fieldControl]="controls[ 'campaignName' ]"
 									[fieldLabel]="'Campaign Name'"> </app-field-validation-icons>
@@ -30,19 +34,18 @@
 						</div>
 					</div>
 
-
-					<div class="col-sm-5 col-sm-offset-1">
-						<div class="form-group">
+					<div class="col-xs-12 col-md-6 col-lg-5">
+						<div [class]="applyValidationStatus('regionalDirector')">
 							<label class="control-label text-capitalize"
-								for="regionalDirector">Regional Director <app-field-required-flag
+								for="regionalDirector">Regional Director Email<app-field-required-flag
 									[requiredFlag]="controls['regionalDirector'].invalid && !controls['regionalDirector'].touched"></app-field-required-flag>
 							</label>
 							<div class="input-group">
 								<span class="input-group-addon"> <span
-									class="glyphicon glyphicon-addon" aria-hidden="true"
-									id="sizing-addon1">@</span>
+									class="glyphicon glyphicon-envelope" aria-hidden="true"
+									id="sizing-addon1"></span>
 								</span> <input type="text" class="form-control" id="regionalDirector"
-									formControlName="regionalDirector"> 
+									formControlName="regionalDirector" [attr.disabled]="viewMode==='view' ? true : null">
 								<app-field-validation-icons
 									[fieldControl]="controls[ 'regionalDirector' ]"
 									[fieldLabel]="'Regional Director'">
@@ -56,56 +59,59 @@
 					</div>
 				</div>
 
-				<div class="row">
-					<div class="col-sm-2">
-						<div class="form-group">
+
+				<div class="form-group">
+					<div
+						class="col-xs-12 col-md-4 col-md-offset-1 col-lg-3 col-lg-offset-1">
+						<div [class]="applyValidationStatus('startDate')">
 							<label class="control-label text-capitalize" for="startDate">Start
-								Date(YYYY-MM-DD) <app-field-required-flag
-									[requiredFlag]="controls['dateForValidation'].invalid && !controls['dateForValidation'].touched"></app-field-required-flag>
+								Date({{todayForPrint | date:'MM/dd/yyyy'}}) <app-field-required-flag
+									[requiredFlag]="controls['startDate'].invalid && !controls['startDate'].touched"></app-field-required-flag>
 							</label>
 							<div class="input-group">
-								<app-ngb-datepicker (selectDate)="setFromDate($event)"></app-ngb-datepicker>
-								<input type="hidden" [(ngModel)]='selectedFromDate'
-									class="form-control" id="startDate" formControlName="startDate">
+								<span class="input-group-addon"> <span
+									class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+								</span><input type="text" class="form-control" id="startDate"
+									formControlName="startDate" [attr.disabled]="viewMode==='view' ? true : null">
 								<app-field-validation-icons
-									[fieldControl]="controls[ 'dateForValidation' ]"
+									[fieldControl]="controls[ 'startDate' ]"
 									[fieldLabel]="'Start Date'"> </app-field-validation-icons>
 							</div>
 							<app-field-validation-messages
-								[fieldControl]="controls[ 'dateForValidation' ]"
+								[fieldControl]="controls[ 'startDate' ]"
 								[fieldLabel]="'Start Date'"> </app-field-validation-messages>
+
 						</div>
+
+
 					</div>
 
-					<div class="col-sm-2 col-sm-offset-1">
-						<div class="form-group">
+
+					<div class="col-xs-12 col-md-4 col-lg-3">
+						<div [class]="applyValidationStatus('endDate')">
 							<label class="control-label text-capitalize" for="endDate">End
-								Date(YYYY-MM-DD) <app-field-required-flag
-									[requiredFlag]="controls['dateForValidation'].invalid && !controls['dateForValidation'].touched"></app-field-required-flag>
+								Date({{todayForPrint | date:'MM/dd/yyyy'}}) <app-field-required-flag
+									[requiredFlag]="controls['endDate'].invalid && !controls['endDate'].touched"></app-field-required-flag>
 							</label>
 							<div class="input-group">
-								<app-ngb-datepicker (selectDate)="setToDate($event)"></app-ngb-datepicker>
-
-								<input type="hidden" [(ngModel)]='selectedToDate'
-									class="form-control" id="endDate" formControlName="endDate">
-								<input type="hidden" [(ngModel)]='dateForValidation'
-									class="form-control" id="dateForValidation"
-									formControlName="dateForValidation">
+								<span class="input-group-addon"> <span
+									class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+								</span><input type="text" class="form-control" id="endDate"
+									formControlName="endDate" [attr.disabled]="viewMode==='view' ? true : null">
 								<app-field-validation-icons
-									[fieldControl]="controls[ 'dateForValidation' ]"
+									[fieldControl]="controls[ 'endDate' ]"
 									[fieldLabel]="'End Date'"> </app-field-validation-icons>
 							</div>
 							<app-field-validation-messages
-								[fieldControl]="controls[ 'dateForValidation' ]"
+								[fieldControl]="controls[ 'endDate' ]"
 								[fieldLabel]="'End Date'"></app-field-validation-messages>
 						</div>
 					</div>
 
+					<div class="col-xs-12 col-md-4 col-lg-4">
 
+						<div [class]="applyValidationStatus('estimatedRevenue')">
 
-
-					<div class="col-sm-5 col-sm-offset-1">
-						<div class="form-group">
 							<label class="control-label text-capitalize"
 								for="estimatedRevenue">Estimated Revenue <app-field-required-flag
 									[requiredFlag]="controls['estimatedRevenue'].invalid && !controls['estimatedRevenue'].touched"></app-field-required-flag>
@@ -114,7 +120,7 @@
 								<span class="input-group-addon"> <span
 									class="glyphicon glyphicon-usd" aria-hidden="true"></span>
 								</span> <input type="text" class="form-control" id="estimatedRevenue"
-									formControlName="estimatedRevenue"> 
+									formControlName="estimatedRevenue" [attr.disabled]="viewMode==='view' ? true : null"> 
 								<app-field-validation-icons
 									[fieldControl]="controls[ 'estimatedRevenue' ]"
 									[fieldLabel]="'Estimated Revenue'">
@@ -125,16 +131,14 @@
 								[fieldLabel]="'Estimated Revenue'">
 							</app-field-validation-messages>
 						</div>
-					</div>
 
+					</div>
 				</div>
 
 
-
-				<div class="row">
-
-					<div class="col-sm-11">
-						<div class="form-group">
+				<div class="form-group">
+					<div class="col-md-12 col-md-offset-1 col-lg-10">
+						<div [class]="applyValidationStatus('campaignDesc')">
 							<label class="control-label text-capitalize" for="campaignDesc">Campaign
 								Description <app-field-required-flag
 									[requiredFlag]="controls['campaignDesc'].invalid && !controls['campaignDesc'].touched"></app-field-required-flag>
@@ -143,8 +147,8 @@
 								<span class="input-group-addon"> <span
 									class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 								</span>
-								<textarea class="form-control" rows="2" id="campaignDesc"
-									formControlName="campaignDesc"></textarea>
+								<textarea class="form-control" rows="1" id="campaignDesc"
+									formControlName="campaignDesc" [attr.disabled]="viewMode==='view' ? true : null"></textarea>
 								<app-field-validation-icons
 									[fieldControl]="controls[ 'campaignDesc' ]"
 									[fieldLabel]="'Campaign Description'">
@@ -160,51 +164,59 @@
 					</div>
 				</div>
 
-				<div class="row">
-					<div class="col-sm-5">
-						<div class="form-group">
+
+				<div class="form-group">
+					<div
+						class="col-sm-12 col-sm-12 col-md-6 col-md-offset-1 col-lg-5 col-lg-offset-1">
+						<div [class]="applyValidationStatus('vendorExists')">
 							<label class="control-label text-capitalize" for="vendorExists">This
 								Vendor has any Existing campaign? <app-field-required-flag
 									[requiredFlag]="controls['vendorExists'].invalid && !controls['vendorExists'].touched"></app-field-required-flag>
 							</label>
 							<div class="input-group">
-								<label class="radio-inline"> <input type="radio"
-									formControlName="vendorExists" id="vendorExistsY" value="Y">
-									Yes
-								</label> <label class="radio-inline"> <input type="radio"
-									formControlName="vendorExists" id="vendorExistsN" value="N">
-									No
+								<span class="col-xs-3"> <label class="radio-inline">
+										<input type="radio" formControlName="vendorExists"
+										id="vendorExistsY" value="Y" [attr.disabled]="viewMode==='view' ? true : null"> Yes
 								</label>
+								</span> <span class="col-xs-3"> <label class="radio-inline">
+										<input type="radio" formControlName="vendorExists"
+										id="vendorExistsN" value="N" [attr.disabled]="viewMode==='view' ? true : null"> No
+								</label>
+								</span>
 
 								<app-field-validation-icons
 									[fieldControl]="controls[ 'vendorExists' ]"
-									[fieldLabel]="'Vendor'"> </app-field-validation-icons>
+									[fieldLabel]="'Vendor'" class="col-xs-1">
+								</app-field-validation-icons>
 							</div>
 							<app-field-validation-messages
 								[fieldControl]="controls[ 'vendorExists' ]"
 								[fieldLabel]="'Vendor'"> </app-field-validation-messages>
+
 						</div>
 					</div>
 
-					<div class="col-sm-5 col-sm-offset-1">
-						<div class="form-group">
+					<div class="col-sm-12 col-sm-12 col-md-6 col-lg-5">
+						<div [class]="applyValidationStatus('anyUpdateRequired')">
 							<label class="control-label text-capitalize"
 								for="anyUpdateRequired">Any Existing Campaign Requires
 								Update? <app-field-required-flag
 									[requiredFlag]="controls['anyUpdateRequired'].invalid && !controls['anyUpdateRequired'].touched"></app-field-required-flag>
 							</label>
 							<div class="input-group">
-								<label class="radio-inline"> <input type="radio"
-									formControlName="anyUpdateRequired" id="anyUpdateRequiredY"
-									value="Y"> Yes
-								</label> <label class="radio-inline"> <input type="radio"
-									formControlName="anyUpdateRequired" id="anyUpdateRequiredN"
-									value="N"> No
+								<span class="col-xs-3"> <label class="radio-inline">
+										<input type="radio" formControlName="anyUpdateRequired"
+										id="anyUpdateRequiredY" value="Y" [attr.disabled]="viewMode==='view' ? true : null"> Yes
 								</label>
-
+								</span> <span class="col-xs-3"> <label class="radio-inline">
+										<input type="radio" formControlName="anyUpdateRequired"
+										id="anyUpdateRequiredN" value="N" [attr.disabled]="viewMode==='view' ? true : null"> No
+								</label>
+								</span>
 								<app-field-validation-icons
 									[fieldControl]="controls[ 'anyUpdateRequired' ]"
-									[fieldLabel]="'Update'"> </app-field-validation-icons>
+									[fieldLabel]="'Update'" class="col-xs-1">
+								</app-field-validation-icons>
 							</div>
 							<app-field-validation-messages
 								[fieldControl]="controls[ 'anyUpdateRequired' ]"
@@ -213,9 +225,10 @@
 					</div>
 				</div>
 
-				<div class="row">
-					<div class="col-sm-11">
-						<div class="form-group">
+
+				<div class="form-group">
+					<div class="col-md-12 col-md-offset-1 col-lg-10">
+						<div [class]="applyValidationStatus('specialInstructions')">
 							<label class="control-label text-capitalize"
 								for="specialInstructions">Special Instructions <app-field-required-flag
 									[requiredFlag]="controls['specialInstructions'].invalid && !controls['specialInstructions'].touched"></app-field-required-flag>
@@ -224,8 +237,8 @@
 								<span class="input-group-addon"> <span
 									class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 								</span>
-								<textarea class="form-control" rows="2" id="specialInstructions"
-									formControlName="specialInstructions"></textarea>
+								<textarea class="form-control" rows="1" id="specialInstructions"
+									formControlName="specialInstructions" [attr.disabled]="viewMode==='view' ? true : null"></textarea>
 								<app-field-validation-icons
 									[fieldControl]="controls[ 'specialInstructions' ]"
 									[fieldLabel]="'Special Instructions'">
@@ -238,23 +251,11 @@
 						</div>
 					</div>
 				</div>
-				<!-- 
-				<div class="row">
-					
-					<div class="col-xs-6 text-left">
-						Campaign form validation status :
-						{{campaignInformationFormGroup.valid}}
-						<button class="btn" (click)="logTheForm()">Log Form
-							Object</button>
-					</div>
-
-
-				</div>
-				 -->
 			</form>
 
 		</div>
 	</div>
 </div>
+
 
 

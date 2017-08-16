@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,8 +43,8 @@ public class CampaignRequestServiceImpl implements CampaignRequestProcess {
     @Override
     public Long create(CampaignRequest campaignRequest, String user) {
 
-        boolean notExists = this.dao.isCampaignNameExists(campaignRequest.getName().toLowerCase());
-        if (notExists) {
+        boolean exists = this.dao.isCampaignNameExists(campaignRequest.getName().toLowerCase());
+        if (!exists) {
             campaignRequest.setCreatedBy(user.toLowerCase());
             campaignRequest.setUpdatedBy(user.toLowerCase());
             try {
@@ -92,8 +93,10 @@ public class CampaignRequestServiceImpl implements CampaignRequestProcess {
     public CampaignRequest get(Long id) throws ServiceException {
 
         Campaign campaign = this.dao.getCampaignRequest(id);
-
-        return CampaignConvertFromDB.convert(campaign);
+        if (null != campaign) {
+            return CampaignConvertFromDB.convert(campaign);
+        }
+        return null;
     }
 
     /**
@@ -119,6 +122,16 @@ public class CampaignRequestServiceImpl implements CampaignRequestProcess {
         }
 
         return null;
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see com.ihg.it.pfm.services.CampaignRequestProcess#isNameExists(java.lang.String)
+     */
+    @Override
+    public boolean isNameExists(String name) throws ServiceException {
+        return this.dao.isCampaignNameExists(StringUtils.trim(name).toLowerCase());
     }
 
     /*

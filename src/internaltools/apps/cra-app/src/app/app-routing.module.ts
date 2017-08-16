@@ -7,10 +7,11 @@ import {Routes, ExtraOptions, RouterModule} from '@angular/router';
 
 
 const routes: Routes = [
-  {path: '', redirectTo: 'create', pathMatch: 'full'},
+  {path: '', redirectTo: 'list', pathMatch: 'full'},
   {path: 'create', loadChildren: './manage/manage.module#ManageModule'},
-  {path: 'list', loadChildren: './list/list.module#ListModule'}
-
+  {path: 'list', loadChildren: './list/list.module#ListModule'},
+  {path: 'view', loadChildren: './manage/manage.module#ManageModule'},
+  {path: 'manage', loadChildren: './manage/manage.module#ManageModule'}
 ];
 
 const config: ExtraOptions = {

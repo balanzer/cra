@@ -14,6 +14,9 @@ import {Observable} from 'rxjs';
 export class ListRecordsComponent implements OnInit {
 
 
+  
+  errorMessage:string ; 
+  
   //campaignDetails$: Observable<CampaignDetails[]>;
   campaignDetails:CampaignDetails[];
 
@@ -32,6 +35,7 @@ export class ListRecordsComponent implements OnInit {
     },
       err => {
         console.log('Service error - show message to user');
+        this.errorMessage="List operation failed. Service unavailable.";
       });
 
   }

@@ -50,7 +50,12 @@ public class CampaignRequestDAO {
     }
 
     public Campaign getCampaignRequest(Long id) {
-        return this.campaignRepository.getOne(id);
+
+        if (this.campaignRepository.exists(id)) {
+            return this.campaignRepository.getOne(id);
+        }
+        return null;
+
     }
 
     public Requester getRequester(String firstName, String lastName, String email, String phoneNumber, String auditUserName) {
@@ -80,7 +85,7 @@ public class CampaignRequestDAO {
      * @return
      */
     public boolean isCampaignNameExists(String name) {
-        return (this.campaignRepository.findByCampaignNameIgnoreCase(name).isEmpty()) ? true : false;
+        return (this.campaignRepository.findByCampaignNameIgnoreCase(name).isEmpty()) ? false : true;
     }
 
     /**

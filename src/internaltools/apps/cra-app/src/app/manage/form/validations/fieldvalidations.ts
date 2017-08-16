@@ -42,10 +42,9 @@ export class FieldValidations {
          * E.g. Date Validation for from and To date using custom field dateForValidation
          */
 
-        if ('dateForValidation' === fieldName) {
-          fieldValidators.push(dateValidationStartEndDate);
+        if ('startDate' === fieldName || 'endDate' === fieldName) {
+          fieldValidators.push(dateValidationBasic);
         }
-
 
       }
     });
@@ -55,6 +54,23 @@ export class FieldValidations {
   }
 
 }
+
+function dateValidationBasic(control: FormControl) {
+
+  const dateValue = (control.value || '').trim();
+
+  const dateStr: string[] = dateValue.split('/');
+
+  const today = new Date();
+  const formedDate = new Date(parseInt(dateStr[2]), (parseInt(dateStr[0]) - 1), parseInt(dateStr[1]));
+  let isValid = false;
+
+  if (formedDate.getTime() !== NaN) {
+    isValid = true;
+  }
+  return isValid ? null : {'invaliddate': true}
+}
+
 
 function noWhiteSpaceError(control: FormControl) {
 

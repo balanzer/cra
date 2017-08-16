@@ -17,7 +17,7 @@ export class ApiService {
 
   constructor(private http: Http) {}
 
-  get(url: string): Observable<object[]> {
+  get(url: string) {
     return this.request(url, RequestMethod.Get);
   }
   post(url: string, body: Object) {

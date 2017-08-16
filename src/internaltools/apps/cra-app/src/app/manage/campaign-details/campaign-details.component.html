@@ -1,0 +1,55 @@
+
+
+<!-- campaign details mode : {{viewMode}}<br>
+ campaign details input : {{inputCampaignDetails | json }}<br>
+ -->
+
+
+<div
+	*ngIf="viewMode==='create'; then no_data_flow else poulate_data_flow">This
+	will not appear. Place holder for requester info processing to show
+	create flow or pre populate data flow for view or edit</div>
+
+
+<ng-template #no_data_flow> <app-requester-information
+	[viewMode]=viewMode (requesterOut)="setRequesterInformation($event)"></app-requester-information>
+<app-campaign-information [viewMode]=viewMode
+	(campaignOut)="setCampaignInformation($event)"></app-campaign-information>
+
+</ng-template>
+<ng-template #poulate_data_flow> <app-requester-information
+	*ngIf="inputCampaignDetails?.requester" [viewMode]=viewMode
+	[inputRequesterInformation]=inputCampaignDetails?.requester
+	(requesterOut)="setRequesterInformation($event)"></app-requester-information>
+
+<app-campaign-information [viewMode]=viewMode
+	*ngIf="inputCampaignDetails?.name"
+	[inputCampaignInformation]=inputCampaignDetails
+	(campaignOut)="setCampaignInformation($event)"></app-campaign-information>
+
+</ng-template>
+
+
+<div class="container">
+	<div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+		<h4 class="text-capitalize">{{errorMessage}}</h4>
+	</div>
+</div>
+<div class="container">
+	<div *ngIf="showCreateFeedback" class="alert alert-success" role="alert">
+		<h4 class="text-capitalize">{{showCreateFeedback}}</h4>
+	</div>
+</div>
+{{test}}
+
+<div class="col-xs-8 text-left">
+	<button [disabled]="!finalFormValidStatus"
+		[attr.class]="finalFormValidStatus ? 'btn btn-primary' : 'btn'"
+		(click)="createCampaign()">Create Campaign</button>
+
+	<button class="btn" (click)="logCompleteInformation()">Log All
+		Info - in Console</button>
+
+	Final Form verification status : {{finalFormValidStatus}}
+</div>
+

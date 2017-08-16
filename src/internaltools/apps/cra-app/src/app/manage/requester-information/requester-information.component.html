@@ -1,25 +1,31 @@
-<div class="container-fluid">
+
+<div class="container">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
 			<h3 class="panel-title text-capitalize">Requester Information</h3>
 		</div>
 		<div class="panel-body">
-			<form class="form-horizontal col-md-offset-2"
+
+
+			<form class="form-horizontal "
 				[formGroup]="requesterInformationFormGroup" (ngSubmit)="doSubmit()"
 				(change)="validateRequesterFormStatus()">
-				<div class="row">
-					<div class="col-sm-5">
-						<div class="form-group">
+
+
+				<div class="form-group">
+					<div
+						class="col-xs-12 col-md-6 col-md-offset-1 col-lg-5 col-lg-offset-1">
+						<div [class]="applyValidationStatus('firstName')">
 							<label class="control-label text-capitalize" for="firstName">First
 								Name <app-field-required-flag
 									[requiredFlag]="controls['firstName'].invalid && !controls['firstName'].touched"></app-field-required-flag>
 							</label>
 							<div class="input-group">
 								<span class="input-group-addon"> <span
-									class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+									class="glyphicon glyphicon-user" aria-hidden="true"></span>
 								</span><input type="text" class="form-control" id="firstName"
-									formControlName="firstName">
-								<app-field-validation-icons
+									formControlName="firstName" [attr.disabled]="viewMode==='view' ? true : null" >
+								<app-field-validation-icons	
 									[fieldControl]="controls[ 'firstName' ]"
 									[fieldLabel]="'First Name'"> </app-field-validation-icons>
 							</div>
@@ -29,18 +35,19 @@
 						</div>
 					</div>
 
+					<div class="col-xs-12 col-md-6 col-lg-5">
+						<div [class]="applyValidationStatus('lastName')">
 
-					<div class="col-sm-5 col-sm-offset-1">
-						<div class="form-group">
+
 							<label class="control-label text-capitalize" for="lastName">Last
 								Name <app-field-required-flag
 									[requiredFlag]="controls['lastName'].invalid && !controls['lastName'].touched"></app-field-required-flag>
 							</label>
 							<div class="input-group">
 								<span class="input-group-addon"> <span
-									class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+									class="glyphicon glyphicon-user" aria-hidden="true"></span>
 								</span><input type="text" class="form-control" id="lastName"
-									formControlName="lastName">
+									formControlName="lastName" [attr.disabled]="viewMode==='view' ? true : null">
 								<app-field-validation-icons
 									[fieldControl]="controls[ 'lastName' ]"
 									[fieldLabel]="'Last Name'"> </app-field-validation-icons>
@@ -53,39 +60,40 @@
 				</div>
 
 
-				<div class="row">
-					<div class="col-sm-5">
-						<div class="form-group">
+				<div class="form-group">
+					<div
+						class="col-xs-12 col-md-6 col-md-offset-1 col-lg-5 col-lg-offset-1">
+						<div [class]="applyValidationStatus('email')">
 							<label class="control-label text-capitalize" for="email">Email<app-field-required-flag
 									[requiredFlag]="controls['email'].invalid && !controls['email'].touched"></app-field-required-flag>
 							</label>
 							<div class="input-group">
 								<span class="input-group-addon"> <span
-									class="glyphicon glyphicon-addon" aria-hidden="true"
-									id="sizing-addon1">@</span>
+									class="glyphicon glyphicon-envelope" aria-hidden="true"
+									id="sizing-addon1"></span>
 								</span><input type="text" class="form-control" id="email"
-									formControlName="email">
-								<app-field-validation-icons
-									[fieldControl]="controls[ 'email' ]"
+									formControlName="email" [attr.disabled]="viewMode==='view' ? true : null">
+								<app-field-validation-icons [fieldControl]="controls[ 'email' ]"
 									[fieldLabel]="'Email'"> </app-field-validation-icons>
 							</div>
 							<app-field-validation-messages
-								[fieldControl]="controls[ 'email' ]"
-								[fieldLabel]="'Email'"> </app-field-validation-messages>
+								[fieldControl]="controls[ 'email' ]" [fieldLabel]="'Email'">
+							</app-field-validation-messages>
 						</div>
 					</div>
 
+					<div class="col-xs-12 col-md-6 col-lg-5">
+						<div [class]="applyValidationStatus('phoneNumber')">
 
-					<div class="col-sm-5 col-sm-offset-1">
-						<div class="form-group">
-							<label class="control-label text-capitalize" for="lastName">Phone Number<app-field-required-flag
+							<label class="control-label text-capitalize" for="lastName">Phone
+								Number<app-field-required-flag
 									[requiredFlag]="controls['phoneNumber'].invalid && !controls['phoneNumber'].touched"></app-field-required-flag>
 							</label>
 							<div class="input-group">
 								<span class="input-group-addon"> <span
 									class="glyphicon glyphicon-phone" aria-hidden="true"></span>
 								</span><input type="text" class="form-control" id="phoneNumber"
-									formControlName="phoneNumber">
+									formControlName="phoneNumber" [attr.disabled]="viewMode==='view' ? true : null">
 								<app-field-validation-icons
 									[fieldControl]="controls[ 'phoneNumber' ]"
 									[fieldLabel]="'Phone Number'"> </app-field-validation-icons>
@@ -93,24 +101,19 @@
 							<app-field-validation-messages
 								[fieldControl]="controls[ 'phoneNumber' ]"
 								[fieldLabel]="'Phone Number'"> </app-field-validation-messages>
+
 						</div>
 					</div>
 				</div>
-				<!-- 
-				<div class="row">
-					<div class="col-xs-6 text-left">
-						Requester form validation status :
-						{{requesterInformationFormGroup.valid}}
-						<button class="btn" (click)="logTheForm()">Log Form
-							Object</button>
-					</div>
 
-
-				</div> -->
 			</form>
 
 		</div>
 	</div>
 </div>
+
+
+
+
 
 

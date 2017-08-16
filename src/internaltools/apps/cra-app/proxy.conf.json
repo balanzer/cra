@@ -1,6 +1,6 @@
 {
   "/api/*": {
-    "target": "http://qap.internaltools.ihg.com",
+    "target": "http://qap.internaltools.cra.ihg.com",
     "secure": false
   }
 }

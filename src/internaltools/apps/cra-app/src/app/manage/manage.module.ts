@@ -7,9 +7,14 @@ import {ManageCampaignComponent} from './manage-campaign/manage-campaign.compone
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {Routes, RouterModule} from '@angular/router';
 import {RequesterInformationComponent} from './requester-information/requester-information.component';
+import {ViewCampaignComponent} from './view-campaign/view-campaign.component';
+import {CreateCampaignComponent} from './create-campaign/create-campaign.component';
+import {CampaignDetailsComponent} from './campaign-details/campaign-details.component';
 
 const manageRoutes: Routes = [
-  {path: 'create', component: ManageCampaignComponent}
+  {path: 'create', component: CreateCampaignComponent},
+  {path: 'view/:campaignId', component: ViewCampaignComponent},
+  {path: 'manage/:campaignId', component: ManageCampaignComponent}
 ];
 
 
@@ -21,9 +26,12 @@ const manageRoutes: Routes = [
   declarations: [
     ManageCampaignComponent,
     CampaignInformationComponent,
-    RequesterInformationComponent
+    RequesterInformationComponent,
+    ViewCampaignComponent,
+    CreateCampaignComponent,
+    CampaignDetailsComponent
   ],
-  exports: [ManageCampaignComponent]
+  exports: []
 })
 export class ManageModule {
 

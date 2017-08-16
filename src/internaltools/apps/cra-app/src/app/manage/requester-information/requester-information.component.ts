@@ -1,4 +1,5 @@
 import {RequesterInformation} from '../../http-service/domain/requesterinformation';
+import {CommonUtils} from '../common/commonutils';
 import {FieldValidations} from '../form/validations/fieldvalidations';
 import {RequesterValidations} from '../form/validations/requestervalidation';
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
@@ -12,6 +13,7 @@ import {ValidatorFn, FormGroup, AbstractControl, FormBuilder} from '@angular/for
 export class RequesterInformationComponent implements OnInit {
 
   @Input() viewMode: string;
+  @Input() inputRequesterInformation: RequesterInformation;
   @Output() requesterOut = new EventEmitter<RequesterInformation>();
 
   requesterDetailsFromForm: RequesterInformation = null;
@@ -20,16 +22,28 @@ export class RequesterInformationComponent implements OnInit {
   controls: {[key: string]: AbstractControl};
 
 
-  constructor(fb: FormBuilder) {
-    this.requesterInformationFormGroup = fb.group({
-      firstName: ['', this.getFieldValidations('firstName')],
-      lastName: ['Varath', this.getFieldValidations('lastName')],
-      email: ['m.v@ihg.com', this.getFieldValidations('email')],
-      phoneNumber: ['123-123-123', this.getFieldValidations('phoneNumber')],
-    });
+  constructor(private fb: FormBuilder) {
 
-    this.controls = this.requesterInformationFormGroup.controls;
+  }
 
+  getFieldValue(field: string): string {
+    if (this.inputRequesterInformation) {
+      switch (field) {
+        case 'firstName': {
+          return this.inputRequesterInformation.firstName;
+        } case 'lastName': {
+          return this.inputRequesterInformation.lastName;
+        } case 'email': {
+          return this.inputRequesterInformation.email;
+        } case 'phoneNumber': {
+          return this.inputRequesterInformation.phoneNumber;
+        }
+        default: {
+          return '';
+        };
+      }
+    }
+    return '';
   }
 
   getFieldValidations(fieldName: string): ValidatorFn[] {
@@ -37,8 +51,27 @@ export class RequesterInformationComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.requesterInformationFormGroup = this.fb.group({
+      firstName: [this.getFieldValue('firstName'), this.getFieldValidations('firstName')],
+      lastName: [this.getFieldValue('lastName'), this.getFieldValidations('lastName')],
+      email: [this.getFieldValue('email'), this.getFieldValidations('email')],
+      phoneNumber: [this.getFieldValue('phoneNumber'), this.getFieldValidations('phoneNumber')],
+    });
+
+    this.controls = this.requesterInformationFormGroup.controls;
   }
 
+
+
+  applyValidationStatus(fieldName: string): string {
+    if (this.controls[fieldName].touched) {
+      if (this.controls[fieldName].valid) {
+        return 'has-success';
+      }
+      return 'has-error';
+    }
+    return '';
+  }
 
   validateRequesterFormStatus() {
 

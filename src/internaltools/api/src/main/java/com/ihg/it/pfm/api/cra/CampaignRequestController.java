@@ -49,18 +49,19 @@ public class CampaignRequestController {
         LOG.debug("Delete campaign {}", id);
 
         this.campaignService.delete(id);
+
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CampaignRequest> get(@RequestHeader(value = "SM_USER") String user, @PathVariable("id") long id) {
-        LOG.debug("Get campaign {}", id);
+        LOG.debug("Get campaign by id {}", id);
 
         CampaignRequest campaignRequest = this.campaignService.get(id);
 
         if (null == campaignRequest) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
 
         return new ResponseEntity<>(campaignRequest, HttpStatus.OK);
@@ -76,6 +77,12 @@ public class CampaignRequestController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(results, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/contains/{name}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Boolean> isCampaignExists(@RequestHeader(value = "SM_USER") String user, @PathVariable("name") String name) {
+        LOG.debug("Get campaign by name {}", name);
+        return new ResponseEntity<>(this.campaignService.isNameExists(name), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)

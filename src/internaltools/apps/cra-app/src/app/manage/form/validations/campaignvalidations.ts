@@ -23,10 +23,17 @@ export const CampaignValidations: FieldInformation[] = [
     maximumLength: 2000,
   }, {
     fieldName: 'startDate',
-    mandatory: false
+    mandatory: true,
+    minimumLength: 10,
+    maximumLength: 10,
+    matchesPattern: RegexValues.DATE_FORMAT,
+
   }, {
     fieldName: 'endDate',
-    mandatory: false
+    mandatory: true,
+    minimumLength: 10,
+    maximumLength: 10,
+    matchesPattern: RegexValues.DATE_FORMAT,
   }
   , {
     fieldName: 'estimatedRevenue',
@@ -35,12 +42,12 @@ export const CampaignValidations: FieldInformation[] = [
     maximumLength: 20,
   }, {
     fieldName: 'vendorExists',
-    mandatory: false,
+    mandatory: true,
     minimumLength: 1,
     maximumLength: 1,
   }, {
     fieldName: 'anyUpdateRequired',
-    mandatory: false,
+    mandatory: true,
     minimumLength: 1,
     maximumLength: 1,
   }, {
@@ -48,9 +55,6 @@ export const CampaignValidations: FieldInformation[] = [
     mandatory: false,
     minimumLength: 10,
     maximumLength: 2000,
-  }, {
-    fieldName: 'dateForValidation',
-    mandatory: false
   }
 
 ];

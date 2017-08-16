@@ -1,4 +1,5 @@
 
+import {CampaignJson} from '../../http-service/domain/campaignJson';
 import {CampaignDetails} from '../../http-service/domain/campaigndetails';
 import {CampaignValidations} from '../form/validations/campaignvalidations';
 import {FieldValidations} from '../form/validations/fieldvalidations';
@@ -13,7 +14,10 @@ import {FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn} from '
 export class CampaignInformationComponent implements OnInit {
 
   @Input() viewMode: string;
+  @Input() inputCampaignInformation: CampaignDetails;
   @Output() campaignOut = new EventEmitter<CampaignDetails>();
+
+  todayForPrint: number = Date.now();
 
   campaignDetailsFromForm: CampaignDetails = null;
 
@@ -24,22 +28,18 @@ export class CampaignInformationComponent implements OnInit {
   selectedToDate = null;
   dateForValidation = null;
 
-  constructor(fb: FormBuilder) {
-    this.campaignInformationFormGroup = fb.group({
-      campaignName: ['Sample Campaign Name', this.getFieldValidations('campaignName')],
-      regionalDirector: ['m.v@ihg.com', this.getFieldValidations('regionalDirector')],
-      campaignDesc: ['Big Desc about campaign goes here', this.getFieldValidations('campaignDesc')],
-      startDate: ['', this.getFieldValidations('dateForValidation')], /*Do common date validation for both start and end date*/
-      endDate: ['', this.getFieldValidations('dateForValidation')],
-      dateForValidation: ['', this.getFieldValidations('dateForValidation')],
-      /*Hidden field does custom validation when both date fields are set */
-      estimatedRevenue: ['$1.23 USD', this.getFieldValidations('estimatedRevenue')],
-      vendorExists: ['', this.getFieldValidations('vendorExists')],
-      anyUpdateRequired: ['', this.getFieldValidations('anyUpdateRequired')],
-      specialInstructions: ['', this.getFieldValidations('specialInstructions')],
-    });
+  applyValidationStatus(fieldName: string): string {
+    if (this.controls[fieldName].touched) {
+      if (this.controls[fieldName].valid) {
+        return 'has-success';
+      }
+      return 'has-error';
+    }
+    return '';
+  }
 
-    this.controls = this.campaignInformationFormGroup.controls;
+  constructor(private fb: FormBuilder) {
+
   }
 
   validateCampaignFormStatus() {
@@ -79,6 +79,21 @@ export class CampaignInformationComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.campaignInformationFormGroup = this.fb.group({
+      campaignName: [this.getFieldValue('campaignName'), this.getFieldValidations('campaignName')],
+      regionalDirector: [this.getFieldValue('regionalDirector'), this.getFieldValidations('regionalDirector')],
+      campaignDesc: [this.getFieldValue('campaignDesc'), this.getFieldValidations('campaignDesc')],
+      startDate: [this.getFieldValue('startDate'), this.getFieldValidations('startDate')],
+      /*Do common date validation for both start and end date*/
+      endDate: [this.getFieldValue('endDate'), this.getFieldValidations('endDate')],
+      estimatedRevenue: [this.getFieldValue('estimatedRevenue'), this.getFieldValidations('estimatedRevenue')],
+      vendorExists: [this.getFieldValue('vendorExists'), this.getFieldValidations('vendorExists')],
+      anyUpdateRequired: [this.getFieldValue('anyUpdateRequired'), this.getFieldValidations('anyUpdateRequired')],
+      specialInstructions: [this.getFieldValue('specialInstructions'), this.getFieldValidations('specialInstructions')],
+    });
+
+    this.controls = this.campaignInformationFormGroup.controls;
   }
 
   doSubmit(): void {
@@ -120,4 +135,38 @@ export class CampaignInformationComponent implements OnInit {
       this.dateForValidation = `${this.selectedFromDate}/${this.selectedToDate}`;
     }
   }
+
+
+  getFieldValue(field: string): string {
+    if (this.inputCampaignInformation) {
+      switch (field) {
+        case 'campaignName': {
+          return this.inputCampaignInformation.name;
+        }
+        case 'regionalDirector': {
+          return this.inputCampaignInformation.regionalDirector;
+        }
+        case 'campaignDesc': {
+          return this.inputCampaignInformation.desc;
+        } case 'startDate': {
+          return this.inputCampaignInformation.startDate;
+        } case 'endDate': {
+          return this.inputCampaignInformation.endDate;
+        } case 'estimatedRevenue': {
+          return this.inputCampaignInformation.estimatedRevenue;
+        } case 'vendorExists': {
+          return this.inputCampaignInformation.vendorExists;
+        } case 'anyUpdateRequired': {
+          return this.inputCampaignInformation.anyUpdateRequired;
+        } case 'specialInstructions': {
+          return this.inputCampaignInformation.specialInstructions;
+        }
+        default: {
+          return '';
+        };
+      }
+    }
+    return '';
+  }
+
 }

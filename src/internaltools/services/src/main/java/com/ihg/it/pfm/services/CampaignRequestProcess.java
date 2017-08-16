@@ -30,13 +30,15 @@ public interface CampaignRequestProcess {
      * @param string
      * @return
      */
-    public Long create(CampaignRequest campaignRequest, String string);
+    public Long create(CampaignRequest campaignRequest, String user);
 
     public void delete(Long id) throws ServiceException;
 
     public CampaignRequest get(Long id) throws ServiceException;
 
     public List<CampaignRequest> getAll() throws ServiceException;
+
+    public boolean isNameExists(String name) throws ServiceException;
 
     /**
      * @param campaignRequest

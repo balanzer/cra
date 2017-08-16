@@ -1,13 +1,15 @@
-<!--
-<ul class="collection">
-	<li class="collection-item"
-		*ngFor="let item of campaignDetails$ | async">{{item.id}} -
-		{{item.name}}</li>
-</ul>
--->
+<div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+	<h4 class="text-capitalize">{{errorMessage}}</h4>
+</div>
 
 <ul class="collection">
-	<li class="collection-item"
-		*ngFor="let item of campaignDetails">{{item.id}} -
-		{{item.name}}</li>
+	<li class="collection-item"><a [routerLink]="['/create']">create</a>
+	</li>
+</ul>
+<hr>
+<ul class="collection">
+	<li class="collection-item" *ngFor="let item of campaignDetails">{{item.id}}
+		- {{item.name}} <a [routerLink]="['/view', item.id]">view</a> <a
+		[routerLink]="['/manage', item.id]">manage</a>
+	</li>
 </ul>
